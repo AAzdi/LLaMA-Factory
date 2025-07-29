@@ -24,7 +24,7 @@ from ...extras.misc import calculate_tps
 from ...extras.ploting import plot_loss
 from ...model import load_model, load_tokenizer
 from ..trainer_utils import create_modelcard_and_push
-from .metric import ComputeAccuracy, ComputeSimilarity, eval_logit_processor
+from .metric import ComputeAccuracy, ComputeSimilarity, ComputeMathVerifyAccuracy, eval_logit_processor
 from .trainer import CustomSeq2SeqTrainer
 
 
@@ -70,8 +70,12 @@ def run_sft(
     if training_args.predict_with_generate:
         metric_module["compute_metrics"] = ComputeSimilarity(tokenizer=tokenizer)
     elif finetuning_args.compute_accuracy:
-        metric_module["compute_metrics"] = ComputeAccuracy()
-        metric_module["preprocess_logits_for_metrics"] = eval_logit_processor
+        # Check if we should use math verify accuracy
+        if getattr(finetuning_args, 'use_math_verify', False):
+            metric_module["compute_metrics"] = ComputeMathVerifyAccuracy(tokenizer=tokenizer)
+        else:
+            metric_module["compute_metrics"] = ComputeAccuracy()
+            metric_module["preprocess_logits_for_metrics"] = eval_logit_processor
 
     # Keyword arguments for `model.generate`
     gen_kwargs = generating_args.to_dict(obey_generation_config=True)

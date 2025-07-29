@@ -2,11 +2,27 @@
   "identity": {
     "file_name": "identity.json"
   },
+  "math_500": {
+    "file_name": "/mnt/dizhang/data/math/math.json"
+  },
   "alpaca_en_demo": {
     "file_name": "alpaca_en_demo.json"
   },
   "alpaca_zh_demo": {
     "file_name": "alpaca_zh_demo.json"
+  },
+  "custom_math": {
+    "file_name": "/mnt/msranlp/xun/BieNet_finetuning/datasets/Math/Math3.2M+490k/train_examples.jsonl",
+    "formatting": "sharegpt",
+    "columns": {
+      "messages": "conversations"
+    },
+    "tags": {
+    "role_tag": "from",
+    "content_tag": "value",
+    "user_tag": "user",
+    "assistant_tag": "assistant"
+  }
   },
   "glaive_toolcall_en_demo": {
     "file_name": "glaive_toolcall_en_demo.json",

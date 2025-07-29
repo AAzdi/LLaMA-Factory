@@ -1,0 +1,38 @@
+### 使用Math Verify的训练配置示例
+
+# 基本模型配置
+model_name_or_path: your_model_path
+template: qwen
+
+# 数据配置
+dataset: your_math_dataset
+cutoff_len: 2048
+
+# 训练配置
+stage: sft
+do_train: true
+do_eval: true
+finetuning_type: lora
+lora_target: all
+lora_rank: 8
+
+# Math Verify评估配置
+compute_accuracy: true
+use_math_verify: true
+predict_with_generate: true
+
+# 其他训练参数
+output_dir: saves/math_model
+overwrite_output_dir: true
+per_device_train_batch_size: 2
+per_device_eval_batch_size: 2
+eval_strategy: steps
+eval_steps: 500
+save_strategy: steps
+save_steps: 500
+logging_steps: 10
+warmup_steps: 100
+max_steps: 1000
+learning_rate: 5e-5
+bf16: true
+gradient_checkpointing: true

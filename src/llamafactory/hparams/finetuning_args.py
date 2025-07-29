@@ -440,6 +440,10 @@ class FinetuningArguments(
         default=False,
         metadata={"help": "Whether or not to compute the token-level accuracy at evaluation."},
     )
+    use_math_verify: bool = field(
+        default=False,
+        metadata={"help": "Whether or not to use math_verify library for mathematical accuracy evaluation."},
+    )
     disable_shuffling: bool = field(
         default=False,
         metadata={"help": "Whether or not to disable the shuffling of the training set."},
