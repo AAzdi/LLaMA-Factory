@@ -1,0 +1,55 @@
+### model
+model_name_or_path: /mnt/dizhang/hf-models/DeepSeek-R1-Distill-Qwen-7B
+trust_remote_code: true
+
+### method
+stage: sft
+do_train: true
+# finetuning_type: full
+
+finetuning_type: lora
+lora_rank: 8
+lora_target: all
+
+deepspeed: examples/deepspeed/ds_z0_config.json  # choices: [ds_z0_config.json, ds_z2_config.json, ds_z3_config.json]
+
+### dataset
+dataset: custom_math
+template: qwen
+cutoff_len: 8192
+max_samples: 1000
+overwrite_cache: true
+preprocessing_num_workers: 16
+dataloader_num_workers: 4
+
+### output
+output_dir: /mnt/dizhang/MoE/sft/qwen2.5_distill_eval_test/0729-custom_math
+logging_steps: 10
+save_strategy: epoch
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+report_to: wandb  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+
+### train
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 2
+learning_rate: 1.0e-5
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+
+### eval
+eval_dataset: math_500
+val_size: 0
+per_device_eval_batch_size: 1
+eval_strategy: steps
+eval_steps: 10
+compute_accuracy: true
+use_math_verify: true
+# predict_with_generate: true
+
+eval_on_start: true
