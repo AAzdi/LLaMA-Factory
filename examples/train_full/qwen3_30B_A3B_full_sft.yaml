@@ -18,7 +18,7 @@ preprocessing_num_workers: 16
 dataloader_num_workers: 4
 
 ### output
-output_dir: /mnt/dizhang/MoE/sft/qwen3-30B-A3B/0729-custom_math
+output_dir: /mnt/dizhang/MoE/sft/qwen3-30B-A3B/0801-custom_math
 logging_steps: 10
 save_steps: 500
 plot_loss: true
@@ -37,12 +37,12 @@ bf16: true
 ddp_timeout: 180000000
 resume_from_checkpoint: null
 
-### eval
-eval_dataset: math_500
-val_size: 0
-per_device_eval_batch_size: 1
-eval_strategy: epoch
-# eval_steps: 500
-compute_accuracy: true
-use_math_verify: true
-predict_with_generate: true
+# ### eval
+# eval_dataset: math_500
+# val_size: 0
+# per_device_eval_batch_size: 1
+# eval_strategy: epoch
+# # eval_steps: 500
+# compute_accuracy: true
+# use_math_verify: true
+# predict_with_generate: true
