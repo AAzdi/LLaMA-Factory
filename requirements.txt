@@ -36,5 +36,5 @@ sse-starlette
 av
 librosa
 wandb==0.21.0
-
+liger_kernel==0.6.1
 
